@@ -163,11 +163,6 @@ const Contractors = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <div className="text-center text-xs text-slate-500">
-        Municipal Corporation of Delhi | Contractor Compliance Module | For
-        Official Use Only
-      </div>
     </div>
   );
 };
