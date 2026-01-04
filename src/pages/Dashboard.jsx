@@ -190,11 +190,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <div className="text-center text-xs text-slate-500">
-        Municipal Corporation of Delhi | Smart Parking Capacity Enforcement
-        System | For Official Use Only
-      </div>
     </div>
   );
 };
