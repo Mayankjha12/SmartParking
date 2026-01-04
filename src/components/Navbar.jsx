@@ -8,6 +8,9 @@ import {
   Bell
 } from "lucide-react";
 
+// 👉 logo import
+import HNLogo from "../assets/hn-logo.png";
+
 const Navbar = ({ activePage, setActivePage }) => {
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -24,9 +27,11 @@ const Navbar = ({ activePage, setActivePage }) => {
         {/* LEFT – LOGO */}
         <div className="flex items-center gap-3">
           <div className="bg-white p-1 rounded">
-            <div className="w-8 h-8 bg-[#1e4e8c] rounded-sm flex items-center justify-center font-bold text-white text-xs">
-              MCD
-            </div>
+            <img
+              src={HNLogo}
+              alt="H-N Logo"
+              className="w-8 h-8 object-contain"
+            />
           </div>
 
           <div className="leading-tight">
@@ -78,6 +83,7 @@ const Navbar = ({ activePage, setActivePage }) => {
             </div>
           </div>
         </div>
+
       </div>
     </nav>
   );
