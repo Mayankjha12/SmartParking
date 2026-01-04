@@ -1,21 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RefreshCw, ShieldCheck, Database, AlertTriangle } from "lucide-react";
 
+const initialData = [
+  { id: 1, name: "Sector 17 Plaza", zone: "Zone A", allowed: 150, current: 142, contractor: "ABC Parking Pvt. Ltd." },
+  { id: 2, name: "City Center Mall", zone: "Zone B", allowed: 300, current: 315, contractor: "Metro Park Solutions" },
+  { id: 3, name: "Railway Station (East)", zone: "Zone A", allowed: 200, current: 156, contractor: "City Parkings Ltd." },
+  { id: 4, name: "Bus Terminal", zone: "Zone C", allowed: 100, current: 78, contractor: "ABC Parking Pvt. Ltd." },
+  { id: 5, name: "Sarojini Nagar Market", zone: "Zone B", allowed: 80, current: 85, contractor: "Green Park Services" },
+  { id: 6, name: "Lajpat Nagar Complex", zone: "Zone C", allowed: 120, current: 98, contractor: "Metro Park Solutions" },
+  { id: 7, name: "Nehru Place IT Hub", zone: "Zone A", allowed: 250, current: 248, contractor: "City Parkings Ltd." },
+  { id: 8, name: "Connaught Place Block A", zone: "Zone A", allowed: 180, current: 165, contractor: "ABC Parking Pvt. Ltd." },
+];
+
 const Dashboard = () => {
-  const data = [
-    { id: 1, name: "Sector 17 Plaza", zone: "Zone A", allowed: 150, current: 142, excess: -8, status: "NEAR FULL", sc: "bg-orange-100 text-orange-600", contractor: "ABC Parking Pvt. Ltd.", updated: "03-01-2026 14:32:15" },
-    { id: 2, name: "City Center Mall", zone: "Zone B", allowed: 300, current: 315, excess: +15, status: "OVER CAPACITY", sc: "bg-red-100 text-red-600", contractor: "Metro Park Solutions", updated: "03-01-2026 14:30:42" },
-    { id: 3, name: "Railway Station (East)", zone: "Zone A", allowed: 200, current: 156, excess: -44, status: "NORMAL", sc: "bg-green-100 text-green-600", contractor: "City Parkings Ltd.", updated: "03-01-2026 14:28:33" },
-    { id: 4, name: "Bus Terminal", zone: "Zone C", allowed: 100, current: 78, excess: -22, status: "NORMAL", sc: "bg-green-100 text-green-600", contractor: "ABC Parking Pvt. Ltd.", updated: "03-01-2026 14:25:18" },
-    { id: 5, name: "Sarojini Nagar Market", zone: "Zone B", allowed: 80, current: 85, excess: +5, status: "OVER CAPACITY", sc: "bg-red-100 text-red-600", contractor: "Green Park Services", updated: "03-01-2026 14:22:56" },
-    { id: 6, name: "Lajpat Nagar Complex", zone: "Zone C", allowed: 120, current: 98, excess: -22, status: "NORMAL", sc: "bg-green-100 text-green-600", contractor: "Metro Park Solutions", updated: "03-01-2026 14:20:11" },
-    { id: 7, name: "Nehru Place IT Hub", zone: "Zone A", allowed: 250, current: 248, excess: -2, status: "NEAR FULL", sc: "bg-orange-100 text-orange-600", contractor: "City Parkings Ltd.", updated: "03-01-2026 14:18:44" },
-    { id: 8, name: "Connaught Place Block A", zone: "Zone A", allowed: 180, current: 165, excess: -15, status: "NEAR FULL", sc: "bg-orange-100 text-orange-600", contractor: "ABC Parking Pvt. Ltd.", updated: "03-01-2026 14:15:22" },
-  ];
+  const [data, setData] = useState([]);
+  const [lastSynced, setLastSynced] = useState(
+    new Date().toLocaleString()
+  );
+
+  useEffect(() => {
+    setData(
+      initialData.map((d) => ({
+        ...d,
+        updated: new Date().toLocaleString(),
+      }))
+    );
+
+    const interval = setInterval(() => {
+      setData((prev) =>
+        prev.map((d) => {
+          const fluctuation = Math.floor(Math.random() * 6) - 3;
+          const newCurrent = Math.max(0, d.current + fluctuation);
+          const excess = newCurrent - d.allowed;
+
+          let status = "NORMAL";
+          let sc = "bg-green-100 text-green-600";
+
+          if (excess > 0) {
+            status = "OVER CAPACITY";
+            sc = "bg-red-100 text-red-600";
+          } else if (excess > -10) {
+            status = "NEAR FULL";
+            sc = "bg-orange-100 text-orange-600";
+          }
+
+          return {
+            ...d,
+            current: newCurrent,
+            excess,
+            status,
+            sc,
+            updated: new Date().toLocaleString(),
+          };
+        })
+      );
+
+      setLastSynced(new Date().toLocaleString());
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const activeLots = 24;
+  const activeViolations = data.filter((d) => d.excess > 0).length;
 
   return (
     <div className="bg-slate-100 min-h-screen p-6 space-y-6">
-
       {/* HEADER */}
       <div className="bg-[#4a74b3] text-white px-6 py-3 flex justify-between items-center rounded">
         <h2 className="font-semibold tracking-wide">
@@ -23,20 +73,22 @@ const Dashboard = () => {
         </h2>
         <div className="flex items-center gap-2 text-sm">
           <RefreshCw size={14} />
-          Last Synced: 04/01/2026, 05:48 pm
+          Last Synced: {lastSynced}
         </div>
       </div>
 
       {/* STATS */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white border p-6 text-center">
-          <p className="text-3xl font-semibold">24</p>
+          <p className="text-3xl font-semibold">{activeLots}</p>
           <p className="text-xs tracking-widest text-slate-500 mt-1">
             TOTAL ACTIVE PARKING LOTS
           </p>
         </div>
         <div className="bg-white border p-6 text-center">
-          <p className="text-3xl font-semibold text-red-600">7</p>
+          <p className="text-3xl font-semibold text-red-600">
+            {activeViolations}
+          </p>
           <p className="text-xs tracking-widest text-slate-500 mt-1">
             ACTIVE VIOLATIONS
           </p>
@@ -65,14 +117,18 @@ const Dashboard = () => {
           </thead>
 
           <tbody className="divide-y">
-            {data.map(d => (
+            {data.map((d, i) => (
               <tr key={d.id} className="hover:bg-slate-50">
-                <td className="p-3">{d.id}</td>
+                <td className="p-3">{i + 1}</td>
                 <td className="p-3 font-medium">{d.name}</td>
                 <td className="p-3 text-center">{d.zone}</td>
                 <td className="p-3 text-center">{d.allowed}</td>
                 <td className="p-3 text-center font-semibold">{d.current}</td>
-                <td className={`p-3 text-center font-semibold ${d.excess > 0 ? "text-red-600" : "text-green-600"}`}>
+                <td
+                  className={`p-3 text-center font-semibold ${
+                    d.excess > 0 ? "text-red-600" : "text-green-600"
+                  }`}
+                >
                   {d.excess > 0 ? `+${d.excess}` : d.excess}
                 </td>
                 <td className="p-3 text-center">
@@ -89,7 +145,9 @@ const Dashboard = () => {
 
         <div className="px-4 py-2 bg-slate-50 text-xs text-slate-500 flex justify-between">
           <span>Showing 8 of 24 parking lots</span>
-          <span>Data source: AI-powered CCTV Vehicle Detection | Auto-refresh: 5 min</span>
+          <span>
+            Data source: AI-powered CCTV Vehicle Detection | Auto-refresh: 5 min
+          </span>
         </div>
       </div>
 
@@ -104,7 +162,9 @@ const Dashboard = () => {
             <Database className="text-blue-600" />
             <div>
               <p className="font-semibold">Tamper-Proof Records</p>
-              <p>All data sourced directly from CCTV feeds with auto time-stamps</p>
+              <p>
+                All data sourced directly from CCTV feeds with auto time-stamps
+              </p>
             </div>
           </div>
 
@@ -112,7 +172,9 @@ const Dashboard = () => {
             <ShieldCheck className="text-blue-600" />
             <div>
               <p className="font-semibold">Centralized MCD Database</p>
-              <p>Read-only access for contractors | Full audit trail maintained</p>
+              <p>
+                Read-only access for contractors | Full audit trail maintained
+              </p>
             </div>
           </div>
 
@@ -120,7 +182,9 @@ const Dashboard = () => {
             <AlertTriangle className="text-orange-500" />
             <div>
               <p className="font-semibold">AI Enforcement</p>
-              <p>AI Vehicle Detection | Over-parking Detection | Recommendations</p>
+              <p>
+                AI Vehicle Detection | Over-parking Detection | Recommendations
+              </p>
             </div>
           </div>
         </div>
@@ -128,7 +192,8 @@ const Dashboard = () => {
 
       {/* FOOTER */}
       <div className="text-center text-xs text-slate-500">
-        Municipal Corporation of Delhi | Smart Parking Capacity Enforcement System | For Official Use Only
+        Municipal Corporation of Delhi | Smart Parking Capacity Enforcement
+        System | For Official Use Only
       </div>
     </div>
   );
