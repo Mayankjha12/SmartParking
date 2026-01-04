@@ -7,7 +7,7 @@ An **AI-powered Smart Parking Capacity Enforcement System** designed for **Munic
 
 **Team Members & Affiliation:**
 
-- Mayank Kumar Jha – Netaji Subhas University of Technology (NSUT)
+- Mayank Kumar Jha – Netaji Subhas University of Technology (NSUT)-Leader
 - Kinshuk Aggarwal – Netaji Subhas University of Technology (NSUT)
 - Vanshika Joras – Netaji Subhas University of Technology (NSUT)
 - Aditya Kumar – Netaji Subhas University of Technology (NSUT)
