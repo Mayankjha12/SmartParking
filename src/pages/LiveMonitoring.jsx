@@ -71,7 +71,6 @@ const LiveMonitoring = () => {
     new Date().toLocaleString()
   );
 
-  /* 🔁 FAKE AI REAL-TIME UPDATE */
   useEffect(() => {
     const interval = setInterval(() => {
       setCameraListData((prev) =>
@@ -251,11 +250,6 @@ const LiveMonitoring = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <div className="text-center text-xs text-slate-500">
-        Municipal Corporation of Delhi | Live CCTV Monitoring Module |
-        For Official Use Only
-      </div>
     </div>
   );
 };
