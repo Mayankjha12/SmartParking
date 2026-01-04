@@ -161,11 +161,6 @@ const ParkingLots = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <div className="text-center text-xs text-slate-500">
-        Municipal Corporation of Delhi | Parking Lots Registry | For Official Use
-        Only
-      </div>
     </div>
   );
 };
