@@ -21,5 +21,5 @@ How can a real-time, tamper-proof technological solution be developed to monitor
 
 ## **Important Links:**
 - **GitHub Repository:** https://github.com/Mayankjha12/SmartParking
-- **"Deployed Prototype:**
+- **Deployed Prototype:**
 https://smartparkingmcd.netlify.app/
