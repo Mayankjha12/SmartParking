@@ -211,12 +211,7 @@ const Violations = () => {
           detection. Timestamps are tamper-proof.
         </div>
       </div>
-
-      {/* PAGE FOOTER */}
-      <div className="text-center text-xs text-slate-500">
-        Municipal Corporation of Delhi | Violation Audit Module | For
-        Official Use Only
-      </div>
+      
     </div>
   );
 };
