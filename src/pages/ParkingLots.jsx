@@ -20,7 +20,6 @@ const ParkingLots = () => {
     new Date().toLocaleString()
   );
 
-  /* 🔁 SIMULATED REAL-TIME CCTV UPDATE */
   useEffect(() => {
     setLots(
       initialLots.map((l) => ({
@@ -64,16 +63,18 @@ const ParkingLots = () => {
     return () => clearInterval(interval);
   }, []);
 
-  /* 📊 STATS */
   const totalLots = lots.length;
   const totalViolations = lots.reduce((sum, l) => sum + l.vio, 0);
 
   return (
-    <div className="bg-slate-100 min-h-screen p-6 space-y-6">
+    <div className="bg-slate-100 min-h-screen p-4 md:p-6 space-y-6">
+
       {/* HEADER */}
-      <div className="bg-[#4a74b3] text-white px-6 py-3 flex justify-between items-center rounded">
-        <h2 className="font-semibold tracking-wide">PARKING LOTS REGISTRY</h2>
-        <div className="flex items-center gap-2 text-sm">
+      <div className="bg-[#4a74b3] text-white px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 rounded">
+        <h2 className="font-semibold tracking-wide text-sm md:text-base">
+          PARKING LOTS REGISTRY
+        </h2>
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <RefreshCw size={14} />
           Last Updated: {lastUpdated}
         </div>
@@ -103,64 +104,66 @@ const ParkingLots = () => {
           ALL REGISTERED PARKING LOTS
         </div>
 
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-slate-500">
-            <tr>
-              <th className="p-3 text-left">S.No.</th>
-              <th className="p-3 text-left">Parking Lot Name</th>
-              <th className="p-3">Zone</th>
-              <th className="p-3">Allowed Capacity</th>
-              <th className="p-3">Current Occupancy</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Violations (30 Days)</th>
-              <th className="p-3 text-left">Contractor</th>
-              <th className="p-3">Last Updated</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-
-          <tbody className="divide-y">
-            {lots.map((lot, i) => (
-              <tr key={lot.id} className="hover:bg-slate-50">
-                <td className="p-3">{i + 1}</td>
-                <td className="p-3 font-medium">{lot.name}</td>
-                <td className="p-3 text-center">{lot.zone}</td>
-                <td className="p-3 text-center">{lot.cap}</td>
-                <td className="p-3 text-center font-semibold">{lot.occ}</td>
-                <td className="p-3 text-center">
-                  <span
-                    className={`px-2 py-1 text-xs font-semibold rounded ${
-                      lot.status === "OVER CAPACITY"
-                        ? "bg-red-100 text-red-600"
-                        : lot.status === "NEAR FULL"
-                        ? "bg-orange-100 text-orange-600"
-                        : "bg-green-100 text-green-600"
-                    }`}
-                  >
-                    {lot.status}
-                  </span>
-                </td>
-                <td className="p-3 text-center font-semibold text-red-600">
-                  {lot.vio}
-                </td>
-                <td className="p-3">{lot.contractor}</td>
-                <td className="p-3 text-xs">{lot.updated}</td>
-                <td className="p-3 text-center">
-                  <button className="flex items-center gap-1 text-slate-500 hover:text-blue-600 mx-auto">
-                    <Eye size={16} /> View
-                  </button>
-                </td>
+        {/*MOBILE SCROLL */}
+        <div className="overflow-x-auto">
+          <table className="min-w-[1100px] w-full text-sm">
+            <thead className="bg-slate-50 text-slate-500">
+              <tr>
+                <th className="p-3 text-left">S.No.</th>
+                <th className="p-3 text-left">Parking Lot Name</th>
+                <th className="p-3">Zone</th>
+                <th className="p-3">Allowed Capacity</th>
+                <th className="p-3">Current Occupancy</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Violations (30 Days)</th>
+                <th className="p-3 text-left">Contractor</th>
+                <th className="p-3">Last Updated</th>
+                <th className="p-3">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
 
-        <div className="px-4 py-2 bg-slate-50 text-xs text-slate-500 flex justify-between">
+            <tbody className="divide-y">
+              {lots.map((lot, i) => (
+                <tr key={lot.id} className="hover:bg-slate-50">
+                  <td className="p-3">{i + 1}</td>
+                  <td className="p-3 font-medium">{lot.name}</td>
+                  <td className="p-3 text-center">{lot.zone}</td>
+                  <td className="p-3 text-center">{lot.cap}</td>
+                  <td className="p-3 text-center font-semibold">{lot.occ}</td>
+                  <td className="p-3 text-center">
+                    <span
+                      className={`px-2 py-1 text-xs font-semibold rounded ${
+                        lot.status === "OVER CAPACITY"
+                          ? "bg-red-100 text-red-600"
+                          : lot.status === "NEAR FULL"
+                          ? "bg-orange-100 text-orange-600"
+                          : "bg-green-100 text-green-600"
+                      }`}
+                    >
+                      {lot.status}
+                    </span>
+                  </td>
+                  <td className="p-3 text-center font-semibold text-red-600">
+                    {lot.vio}
+                  </td>
+                  <td className="p-3">{lot.contractor}</td>
+                  <td className="p-3 text-xs">{lot.updated}</td>
+                  <td className="p-3 text-center">
+                    <button className="flex items-center gap-1 text-slate-500 hover:text-blue-600 mx-auto">
+                      <Eye size={16} /> View
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="px-4 py-2 bg-slate-50 text-xs text-slate-500 flex flex-col md:flex-row justify-between gap-1">
           <span>Showing {lots.length} parking lots</span>
           <span>Data source: AI-powered CCTV Vehicle Detection</span>
         </div>
       </div>
-
     </div>
   );
 };
