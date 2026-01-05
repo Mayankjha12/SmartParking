@@ -14,9 +14,7 @@ const initialData = [
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [lastSynced, setLastSynced] = useState(
-    new Date().toLocaleString()
-  );
+  const [lastSynced, setLastSynced] = useState(new Date().toLocaleString());
 
   useEffect(() => {
     setData(
@@ -65,13 +63,14 @@ const Dashboard = () => {
   const activeViolations = data.filter((d) => d.excess > 0).length;
 
   return (
-    <div className="bg-slate-100 min-h-screen p-6 space-y-6">
+    <div className="bg-slate-100 min-h-screen p-4 md:p-6 space-y-6">
+
       {/* HEADER */}
-      <div className="bg-[#4a74b3] text-white px-6 py-3 flex justify-between items-center rounded">
-        <h2 className="font-semibold tracking-wide">
+      <div className="bg-[#4a74b3] text-white px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 rounded">
+        <h2 className="font-semibold tracking-wide text-sm md:text-base">
           MCD SMART PARKING CAPACITY ENFORCEMENT SYSTEM
         </h2>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <RefreshCw size={14} />
           Last Synced: {lastSynced}
         </div>
@@ -95,13 +94,13 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* TABLE */}
-      <div className="bg-white border rounded overflow-hidden">
+      {/* TABLE (RESPONSIVE FIX HERE) */}
+      <div className="bg-white border rounded overflow-x-auto">
         <div className="bg-[#4a74b3] text-white px-4 py-2 font-semibold">
           PARKING LOTS STATUS – REAL TIME CCTV MONITORING
         </div>
 
-        <table className="w-full text-sm">
+        <table className="w-full min-w-[900px] text-sm">
           <thead className="bg-slate-50 text-slate-500">
             <tr>
               <th className="p-3 text-left">S.No.</th>
@@ -109,7 +108,7 @@ const Dashboard = () => {
               <th className="p-3">Zone</th>
               <th className="p-3">Allowed Capacity</th>
               <th className="p-3">Current Occupancy</th>
-              <th className="p-3">Excess Vehicles (+/-)</th>
+              <th className="p-3">Excess Vehicles</th>
               <th className="p-3">Status</th>
               <th className="p-3 text-left">Contractor</th>
               <th className="p-3">Last Updated</th>
@@ -143,11 +142,9 @@ const Dashboard = () => {
           </tbody>
         </table>
 
-        <div className="px-4 py-2 bg-slate-50 text-xs text-slate-500 flex justify-between">
+        <div className="px-4 py-2 bg-slate-50 text-xs text-slate-500 flex flex-col md:flex-row justify-between gap-2">
           <span>Showing 8 of 24 parking lots</span>
-          <span>
-            Data source: AI-powered CCTV Vehicle Detection | Auto-refresh: 5 min
-          </span>
+          <span>Data source: AI-powered CCTV Vehicle Detection</span>
         </div>
       </div>
 
@@ -162,9 +159,7 @@ const Dashboard = () => {
             <Database className="text-blue-600" />
             <div>
               <p className="font-semibold">Tamper-Proof Records</p>
-              <p>
-                All data sourced directly from CCTV feeds with auto time-stamps
-              </p>
+              <p>Auto time-stamped CCTV-based data ingestion</p>
             </div>
           </div>
 
@@ -172,9 +167,7 @@ const Dashboard = () => {
             <ShieldCheck className="text-blue-600" />
             <div>
               <p className="font-semibold">Centralized MCD Database</p>
-              <p>
-                Read-only access for contractors | Full audit trail maintained
-              </p>
+              <p>Read-only contractor access with full audit trail</p>
             </div>
           </div>
 
@@ -182,9 +175,7 @@ const Dashboard = () => {
             <AlertTriangle className="text-orange-500" />
             <div>
               <p className="font-semibold">AI Enforcement</p>
-              <p>
-                AI Vehicle Detection | Over-parking Detection | Recommendations
-              </p>
+              <p>YOLO-based vehicle detection & capacity breach alerts</p>
             </div>
           </div>
         </div>
