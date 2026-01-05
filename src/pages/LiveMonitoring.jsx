@@ -108,13 +108,14 @@ const LiveMonitoring = () => {
   const mainCam = cameraListData[0];
 
   return (
-    <div className="bg-slate-100 min-h-screen p-6 space-y-6">
+    <div className="bg-slate-100 min-h-screen p-4 md:p-6 space-y-6">
+
       {/* HEADER */}
-      <div className="bg-[#4a74b3] text-white px-6 py-3 flex justify-between items-center rounded">
-        <h2 className="font-semibold tracking-wide">
+      <div className="bg-[#4a74b3] text-white px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 rounded">
+        <h2 className="font-semibold tracking-wide text-sm md:text-base">
           LIVE CCTV MONITORING – AI VEHICLE DETECTION
         </h2>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-xs md:text-sm">
           <RefreshCw size={14} />
           Last Synced: {lastSynced}
         </div>
@@ -141,9 +142,10 @@ const LiveMonitoring = () => {
       </div>
 
       {/* MAIN GRID */}
-      <div className="grid grid-cols-12 gap-6">
-        {/* LEFT – CCTV */}
-        <div className="col-span-8 bg-white border rounded overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        {/* LEFT – CCTV FEED */}
+        <div className="lg:col-span-8 bg-white border rounded overflow-hidden">
           <div className="bg-[#4a74b3] text-white px-4 py-2 flex justify-between items-center text-sm font-semibold">
             <span className="flex items-center gap-2">
               <Video size={14} /> {mainCam.name}
@@ -154,7 +156,7 @@ const LiveMonitoring = () => {
             </span>
           </div>
 
-          <div className="h-[360px] bg-slate-50 flex flex-col items-center justify-center">
+          <div className="h-[260px] md:h-[360px] bg-slate-50 flex flex-col items-center justify-center">
             <Video size={48} className="text-slate-300 mb-2" />
             <p className="text-slate-400 text-sm">
               CCTV Feed Placeholder
@@ -196,14 +198,14 @@ const LiveMonitoring = () => {
             </div>
           </div>
 
-          <div className="bg-slate-50 px-4 py-2 text-xs text-slate-500 flex justify-between">
+          <div className="bg-slate-50 px-4 py-2 text-xs text-slate-500 flex flex-col md:flex-row justify-between gap-1">
             <span>Last Frame Update: {mainCam.time}</span>
             <span>AI Processing: Real-time</span>
           </div>
         </div>
 
         {/* RIGHT – CAMERA LIST */}
-        <div className="col-span-4 bg-white border rounded overflow-hidden">
+        <div className="lg:col-span-4 bg-white border rounded overflow-hidden">
           <div className="bg-[#4a74b3] text-white px-4 py-2 font-semibold">
             CAMERA LIST
           </div>
@@ -213,11 +215,11 @@ const LiveMonitoring = () => {
             <span>Status</span>
           </div>
 
-          <div className="divide-y max-h-[520px] overflow-y-auto">
+          <div className="divide-y max-h-[420px] md:max-h-[520px] overflow-y-auto">
             {cameraListData.map((cam, i) => (
               <div key={i} className="px-4 py-3 hover:bg-slate-50">
-                <div className="flex justify-between">
-                  <div className="space-y-1">
+                <div className="flex justify-between gap-3">
+                  <div>
                     <p className="text-sm font-medium">{cam.name}</p>
                     <div className="flex items-center gap-1 text-xs text-slate-500">
                       <Camera size={12} />
@@ -248,8 +250,8 @@ const LiveMonitoring = () => {
             ))}
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   );
 };
