@@ -1,35 +1,55 @@
 import React from "react";
+import HNLogo from "../assets/hn-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#153a6b] text-white text-[11px] mt-auto border-t border-blue-800">
-      <div className="max-w-7xl mx-auto px-4 py-4">
+    <footer className="mt-auto">
+      <div className="bg-gradient-to-br from-[#0a1f44] via-[#0f2e57] to-[#123b7a] text-white">
 
-        {/* MAIN CONTENT */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-6 py-8">
 
-          {/* LEFT */}
-          <p className="font-semibold tracking-wide">
-            © 2026 Municipal Corporation of Delhi
-          </p>
+          {/* TOP ROW */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
-          {/* CENTER */}
-          <p className="opacity-80 leading-snug">
-            Smart Parking Capacity Enforcement System
-          </p>
+            {/* LEFT – GOV TEXT */}
+            <div className="text-center md:text-left">
+              <p className="text-sm font-semibold tracking-wide">
+                Municipal Corporation of Delhi
+              </p>
+              <p className="text-[11px] opacity-80 tracking-widest uppercase mt-1">
+                Smart City Initiative
+              </p>
+            </div>
 
-          {/* RIGHT */}
-          <p className="opacity-60 leading-snug">
-            AI-powered CCTV Vehicle Detection & Compliance Monitoring
-          </p>
+            {/* RIGHT – SYSTEM INFO */}
+            <div className="text-center md:text-right">
+              <p className="text-sm font-medium">
+                Smart Parking Capacity Enforcement
+              </p>
+              <p className="text-[11px] opacity-80 mt-1 tracking-wide">
+                AI-Powered CCTV Vehicle Detection System
+              </p>
+            </div>
+
+          </div>
+
+          {/* DIVIDER */}
+          <div className="my-6 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
+          {/* BOTTOM ROW */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-[11px] opacity-80">
+
+            <p className="tracking-wide">
+              © 2026 Municipal Corporation of Delhi. All Rights Reserved.
+            </p>
+
+            <p className="tracking-[0.2em] uppercase text-[10px]">
+              For Official Use Only
+            </p>
+
+          </div>
 
         </div>
-
-        {/* MOBILE */}
-        <div className="mt-3 text-center text-[10px] opacity-70 uppercase tracking-widest">
-          For Official Use Only
-        </div>
-
       </div>
     </footer>
   );

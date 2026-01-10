@@ -7,7 +7,7 @@ import {
   Users,
   Bell,
   Menu,
-  X
+  X,
 } from "lucide-react";
 
 import HNLogo from "../assets/hn-logo.png";
@@ -20,102 +20,134 @@ const Navbar = ({ activePage, setActivePage }) => {
     { id: "live", label: "Live Monitoring", icon: Video },
     { id: "lots", label: "Parking Lots", icon: MapPin },
     { id: "violations", label: "Violations", icon: AlertTriangle },
-    { id: "contractors", label: "Contractors", icon: Users }
+    { id: "contractors", label: "Contractors", icon: Users },
   ];
 
   return (
-    <nav className="bg-[#1e4e8c] text-white shadow-md sticky top-0 z-50">
-      <div className="w-full px-4 md:px-6 flex justify-between items-center h-16">
+    <nav className="sticky top-0 z-50 px-4 pt-4">
+      <div className="backdrop-blur-xl bg-white/80 border border-slate-200 shadow-lg rounded-2xl">
 
-        {/* LEFT – LOGO */}
-        <div className="flex items-center gap-3">
-          <div className="bg-white p-1 rounded">
-            <img
-              src={HNLogo}
-              alt="H-N Logo"
-              className="w-8 h-8 object-contain"
-            />
-          </div>
+        <div className="h-16 px-6 flex justify-between items-center">
 
-          <div className="leading-tight">
-            <p className="font-bold text-sm uppercase">Smart Parking</p>
-            <p className="text-[10px] text-blue-200 tracking-wide">
-              Enforcement System
-            </p>
-          </div>
-        </div>
-
-        {/* DESKTOP NAV */}
-        <div className="hidden md:flex h-full">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActivePage(item.id)}
-              className={`flex items-center gap-2 px-4 text-sm font-medium transition-all
-                ${
-                  activePage === item.id
-                    ? "bg-[#153a6b] border-b-4 border-yellow-400"
-                    : "hover:bg-white/10 opacity-80"
-                }`}
-            >
-              <item.icon size={16} />
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        {/* RIGHT – ADMIN (desktop) */}
-        <div className="hidden md:flex items-center gap-6">
-          <div className="relative">
-            <Bell size={18} />
-            <span className="absolute -top-1 -right-1 bg-red-500 text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-              3
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 border-l border-blue-400 pl-4">
-            <div className="text-right">
-              <p className="text-xs font-semibold">Admin User</p>
-              <p className="text-[10px] text-blue-200">MCD Internal</p>
+          {/* LEFT – LOGO */}
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 rounded-full bg-white shadow ring-1 ring-slate-300 overflow-hidden">
+              <img
+                src={HNLogo}
+                alt="H-N Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="w-9 h-9 bg-yellow-500 rounded-full flex items-center justify-center text-sm font-bold text-black">
-              AD
+
+            <div className="leading-tight">
+              <p className="font-semibold text-[15px] text-slate-900">
+                Smart Parking
+              </p>
+              <p className="text-[10px] text-slate-500 tracking-[0.3em] uppercase">
+                Enforcement System
+              </p>
             </div>
           </div>
+
+          {/* DESKTOP NAV – CLEAN TAB STYLE */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const active = activePage === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActivePage(item.id)}
+                  className={`relative flex items-center gap-2 pb-2 text-sm font-medium tracking-wide transition-all duration-300
+                    ${
+                      active
+                        ? "text-blue-700"
+                        : "text-slate-600 hover:text-blue-600"
+                    }`}
+                >
+                  <Icon size={16} />
+                  {item.label}
+
+                  {/* UNDERLINE INDICATOR */}
+                  <span
+                    className={`absolute left-0 -bottom-1 h-[2px] w-full bg-blue-600 transition-all duration-300
+                      ${
+                        active
+                          ? "opacity-100 scale-x-100"
+                          : "opacity-0 scale-x-0"
+                      }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* RIGHT – ADMIN */}
+          <div className="hidden md:flex items-center gap-6">
+            <div className="relative cursor-pointer">
+              <Bell size={18} className="text-slate-600" />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-[10px] w-4 h-4 flex items-center justify-center rounded-full text-white">
+                3
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 pl-5 border-l border-slate-300">
+              <div className="text-right leading-tight">
+                <p className="text-xs font-semibold text-slate-800">
+                  Admin User
+                </p>
+                <p className="text-[10px] text-slate-500 tracking-wider">
+                  MCD INTERNAL
+                </p>
+              </div>
+
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center text-sm font-bold shadow">
+                AD
+              </div>
+            </div>
+          </div>
+
+          {/* MOBILE MENU BUTTON */}
+          <button
+            className="md:hidden text-slate-700"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
 
-        {/* MOBILE MENU BUTTON */}
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* MOBILE MENU */}
+        {open && (
+          <div className="md:hidden border-t border-slate-200 px-4 pb-4">
+            <div className="mt-3 bg-white rounded-xl shadow overflow-hidden">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const active = activePage === item.id;
+
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActivePage(item.id);
+                      setOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-5 py-3 text-sm transition
+                      ${
+                        active
+                          ? "bg-blue-50 text-blue-700 font-medium"
+                          : "hover:bg-slate-100 text-slate-700"
+                      }`}
+                  >
+                    <Icon size={16} />
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* MOBILE DROPDOWN */}
-      {open && (
-        <div className="md:hidden bg-[#153a6b] border-t border-blue-700">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setActivePage(item.id);
-                setOpen(false);
-              }}
-              className={`w-full flex items-center gap-3 px-4 py-3 text-sm
-                ${
-                  activePage === item.id
-                    ? "bg-[#102f5a]"
-                    : "hover:bg-white/10"
-                }`}
-            >
-              <item.icon size={16} />
-              {item.label}
-            </button>
-          ))}
-        </div>
-      )}
     </nav>
   );
 };
