@@ -5,20 +5,26 @@ const Footer = () => {
   return (
     <footer className="mt-auto">
       <div className="bg-gradient-to-br from-[#0a1f44] via-[#0f2e57] to-[#123b7a] text-white">
-
         <div className="max-w-7xl mx-auto px-6 py-8">
 
           {/* TOP ROW */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
-            {/* LEFT – GOV TEXT */}
-            <div className="text-center md:text-left">
-              <p className="text-sm font-semibold tracking-wide">
-                Municipal Corporation of Delhi
-              </p>
-              <p className="text-[11px] opacity-80 tracking-widest uppercase mt-1">
-                Smart City Initiative
-              </p>
+            {/* LEFT – LOGO + GOV TEXT */}
+            <div className="flex items-center gap-4 text-center md:text-left">
+              <img
+                src={HNLogo}
+                alt="Municipal Corporation of Delhi Logo"
+                className="h-12 w-auto object-contain"
+              />
+              <div>
+                <p className="text-sm font-semibold tracking-wide">
+                  Municipal Corporation of Delhi
+                </p>
+                <p className="text-[11px] opacity-80 tracking-widest uppercase mt-1">
+                  Smart City Initiative
+                </p>
+              </div>
             </div>
 
             {/* RIGHT – SYSTEM INFO */}
@@ -38,7 +44,6 @@ const Footer = () => {
 
           {/* BOTTOM ROW */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-[11px] opacity-80">
-
             <p className="tracking-wide">
               © 2026 Municipal Corporation of Delhi. All Rights Reserved.
             </p>
@@ -46,7 +51,6 @@ const Footer = () => {
             <p className="tracking-[0.2em] uppercase text-[10px]">
               For Official Use Only
             </p>
-
           </div>
 
         </div>
