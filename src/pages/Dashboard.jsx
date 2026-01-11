@@ -60,7 +60,7 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 🔹 Smooth scroll when dashboard opens
+  //  Scroll on clicking dashboard
   useEffect(() => {
     if (showDashboard) {
       setTimeout(() => {
@@ -74,7 +74,7 @@ const Dashboard = () => {
   return (
     <div className="bg-slate-100 min-h-screen">
 
-      {/* ================= HERO SECTION ================= */}
+      {/* HERO SECTION */}
       <div
         className="relative h-[75vh] flex items-center"
         style={{
@@ -114,10 +114,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      {/* ================= END HERO ================= */}
+      
 
 
-      {/* ================= DASHBOARD (CONDITIONAL) ================= */}
+      {/*  DASHBOARD (rotation) */}
       {showDashboard && (
         <div id="dashboard-main" className="p-6 space-y-6">
 
@@ -200,7 +200,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-      {/* ================= END DASHBOARD ================= */}
+  
 
     </div>
   );
