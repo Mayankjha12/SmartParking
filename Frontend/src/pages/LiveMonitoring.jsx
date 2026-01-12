@@ -3,8 +3,7 @@ import {
   Video,
   CheckCircle,
   WifiOff,
-  RefreshCw,
-  Camera,
+  RefreshCw
 } from "lucide-react";
 
 const LiveMonitoring = () => {
