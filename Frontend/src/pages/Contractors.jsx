@@ -184,10 +184,10 @@ const Contractors = () => {
 
               <div className="text-sm text-slate-600">
                 <p className="mb-3">
-                  <h4>Name: </h4>Rakesh Yadav <br/>
-                  <h4>Phone number: </h4> +91-XXXXXXXXXX <br/>
-                  <h4>Number Plate:</h4> XXX-XXX-XXXX <br/>
-                  <h4>Address:</h4> XYZ Block, ABC Colony, New Delhi - 110023
+                  <b>Name: </b>Rakesh Yadav <br/>
+                  <b>Phone number: </b> +91-XXXXXXXXXX <br/>
+                  <b>Number Plate:</b> XXX-XXX-XXXX <br/>
+                  <b>Address:</b> XYZ Block, ABC Colony, New Delhi - 110023
                 
                 </p>
                 
