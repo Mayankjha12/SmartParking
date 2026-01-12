@@ -175,7 +175,7 @@ const Contractors = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
               <video
-                src="/parking-demo.mp4"
+                src="/parking-demo2.mp4"
                 controls
                 autoPlay
                 muted
@@ -184,10 +184,10 @@ const Contractors = () => {
 
               <div className="text-sm text-slate-600">
                 <p className="mb-3">
-                  Name: Rakesh Yadav <br/>
-                  Phone number: +91-XXXXXXXXXX <br/>
-                  Number Plate: XXX-XXX-XXXX <br/>
-                  Address: XYZ Block, ABC Colony, New Delhi - 110023
+                  <h4>Name: </h4>Rakesh Yadav <br/>
+                  <h4>Phone number: </h4> +91-XXXXXXXXXX <br/>
+                  <h4>Number Plate:</h4> XXX-XXX-XXXX <br/>
+                  <h4>Address:</h4> XYZ Block, ABC Colony, New Delhi - 110023
                 
                 </p>
                 
