@@ -5,7 +5,6 @@ import {
   MapPin,
   AlertTriangle,
   Users,
-  Bell,
   Menu,
   X,
 } from "lucide-react";
