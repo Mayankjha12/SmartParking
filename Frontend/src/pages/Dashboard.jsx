@@ -158,9 +158,9 @@ const Dashboard = () => {
               Open Dashboard
             </button>
 
-            <button className="border border-white/70 text-white px-6 py-3 rounded font-semibold hover:bg-white/10">
+            {/* <button className="border border-white/70 text-white px-6 py-3 rounded font-semibold hover:bg-white/10">
               View Problem Statement
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
