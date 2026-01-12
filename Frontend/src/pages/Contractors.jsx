@@ -184,9 +184,9 @@ const Contractors = () => {
 
               <div className="text-sm text-slate-600">
                 <p className="mb-3">
-                  Name: Rakesh Yadav <br>
-                  Phone number: +91-XXXXXXXXXX <br>
-                  Number Plate: XXX-XXX-XXXX <br>
+                  Name: Rakesh Yadav <br/>
+                  Phone number: +91-XXXXXXXXXX <br/>
+                  Number Plate: XXX-XXX-XXXX <br/>
                   Address: XYZ Block, ABC Colony, New Delhi - 110023
                 
                 </p>
