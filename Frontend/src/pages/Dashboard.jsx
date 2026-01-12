@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RefreshCw, ShieldCheck, Database, AlertTriangle } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 
 const initialData = [
   { id: 1, name: "Sector 17 Plaza", zone: "Zone A", allowed: 150, current: 142, contractor: "ABC Parking Pvt. Ltd." },
