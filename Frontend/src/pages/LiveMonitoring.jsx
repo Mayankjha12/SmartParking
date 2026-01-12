@@ -198,7 +198,18 @@ const LiveMonitoring = () => {
           </div>
 
           {/* 🎥 VIDEO FEED */}
-          <div className="h-[260px] md:h-[360px] bg-black relative">
+
+          <div className="h-[260px] md:h-[360px] bg-black relative flex items-center justify-center">
+  <video
+    src="/parking-demo.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="h-full w-full object-contain"
+  />
+</div>
+          {/* <div className="h-[260px] md:h-[360px] bg-black relative">
             <video
               src="/parking-demo.mp4"
               autoPlay
@@ -207,7 +218,7 @@ const LiveMonitoring = () => {
               playsInline
               className="h-full w-full object-cover"
             />
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-3 border-t text-center">
             <div className="p-4">
