@@ -175,7 +175,7 @@ const Contractors = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
               <video
-                src="/videos/parking-demo.mp4"
+                src="/pub/parking-demo.mp4"
                 controls
                 autoPlay
                 muted
@@ -184,9 +184,11 @@ const Contractors = () => {
 
               <div className="text-sm text-slate-600">
                 <p className="mb-3">
-                  AI-powered CCTV footage captured during capacity violations.
-                  This evidence is stored securely and linked with contractor
-                  performance records.
+                  Name: Rakesh Yadav
+                  Phone number: +91-XXXXXXXXXX
+                  Number Plate: XXX-XXX-XXXX
+                  Address: XYZ Block, ABC Colony, New Delhi - 110023
+                
                 </p>
                 <p>
                   Repeated violations automatically trigger penalties and
