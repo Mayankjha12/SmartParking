@@ -6,6 +6,9 @@ const Contractors = () => {
     new Date().toLocaleString()
   );
 
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedContractor, setSelectedContractor] = useState(null);
+
   const [cData, setCData] = useState([
     { name: "ABC Parking Pvt. Ltd.", lots: 5, v30: 4, penalty: 12000, status: "WARNING" },
     { name: "Metro Park Solutions", lots: 6, v30: 8, penalty: 28000, status: "CRITICAL" },
@@ -49,11 +52,11 @@ const Contractors = () => {
     <div className="bg-slate-100 min-h-screen p-4 md:p-6 space-y-6">
 
       {/* HEADER */}
-      <div className="bg-[#4a74b3] text-white px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 rounded">
-        <h2 className="font-semibold tracking-wide text-sm md:text-base">
+      <div className="bg-[#4a74b3] text-white px-4 md:px-6 py-3 flex justify-between rounded">
+        <h2 className="font-semibold">
           CONTRACTOR COMPLIANCE MANAGEMENT
         </h2>
-        <div className="flex items-center gap-2 text-xs md:text-sm">
+        <div className="flex items-center gap-2 text-sm">
           <RefreshCw size={14} />
           Last Updated: {lastUpdated}
         </div>
@@ -64,9 +67,7 @@ const Contractors = () => {
         <div className="bg-white border p-6 text-center">
           <Users className="mx-auto text-slate-400 mb-2" size={22} />
           <p className="text-3xl font-semibold">{totalContractors}</p>
-          <p className="text-xs tracking-widest text-slate-500 mt-1">
-            TOTAL CONTRACTORS
-          </p>
+          <p className="text-xs text-slate-500">TOTAL CONTRACTORS</p>
         </div>
 
         <div className="bg-white border p-6 text-center">
@@ -74,27 +75,21 @@ const Contractors = () => {
           <p className="text-3xl font-semibold text-red-600">
             {totalViolations}
           </p>
-          <p className="text-xs tracking-widest text-slate-500 mt-1">
-            TOTAL VIOLATIONS (30 DAYS)
-          </p>
+          <p className="text-xs text-slate-500">TOTAL VIOLATIONS (30 DAYS)</p>
         </div>
 
         <div className="bg-white border p-6 text-center">
           <p className="text-3xl font-semibold text-orange-600">
             ₹{totalPenalty.toLocaleString()}
           </p>
-          <p className="text-xs tracking-widest text-slate-500 mt-1">
-            TOTAL PENALTY DUE
-          </p>
+          <p className="text-xs text-slate-500">TOTAL PENALTY DUE</p>
         </div>
 
         <div className="bg-white border p-6 text-center border-red-200">
           <p className="text-3xl font-semibold text-red-600">
             {criticalCount}
           </p>
-          <p className="text-xs tracking-widest text-slate-500 mt-1">
-            CRITICAL STATUS
-          </p>
+          <p className="text-xs text-slate-500">CRITICAL STATUS</p>
         </div>
       </div>
 
@@ -104,25 +99,24 @@ const Contractors = () => {
           CONTRACTOR PERFORMANCE – LAST 30 DAYS
         </div>
 
-        {/* MOBILE SAFE SCROLL */}
         <div className="overflow-x-auto">
           <table className="min-w-[1100px] w-full text-sm">
             <thead className="bg-slate-50 text-slate-500">
               <tr>
-                <th className="p-3 text-left">S.No.</th>
+                <th className="p-3">S.No.</th>
                 <th className="p-3 text-left">Contractor Name</th>
-                <th className="p-3 text-center">Parking Lots</th>
-                <th className="p-3 text-center">Violations (30d)</th>
-                <th className="p-3 text-center text-red-600">Penalty (₹)</th>
-                <th className="p-3 text-center">Status</th>
-                <th className="p-3 text-center">Action</th>
+                <th className="p-3">Parking Lots</th>
+                <th className="p-3">Violations (30d)</th>
+                <th className="p-3 text-red-600">Penalty (₹)</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Action</th>
               </tr>
             </thead>
 
             <tbody className="divide-y">
               {cData.map((c, i) => (
-                <tr key={i} className="hover:bg-slate-50">
-                  <td className="p-3">{i + 1}</td>
+                <tr key={i}>
+                  <td className="p-3 text-center">{i + 1}</td>
                   <td className="p-3 font-medium">{c.name}</td>
                   <td className="p-3 text-center">{c.lots}</td>
                   <td className="p-3 text-center text-orange-600 font-semibold">
@@ -145,7 +139,13 @@ const Contractors = () => {
                     </span>
                   </td>
                   <td className="p-3 text-center">
-                    <button className="flex items-center gap-1 mx-auto text-slate-500 hover:text-blue-600">
+                    <button
+                      onClick={() => {
+                        setSelectedContractor(c);
+                        setOpenModal(true);
+                      }}
+                      className="flex items-center gap-1 mx-auto text-slate-500 hover:text-blue-600"
+                    >
                       <Eye size={16} /> View
                     </button>
                   </td>
@@ -154,11 +154,50 @@ const Contractors = () => {
             </tbody>
           </table>
         </div>
-
-        <div className="px-4 py-2 bg-slate-50 text-xs text-slate-500 italic">
-          Contractors marked <b>CRITICAL</b> are flagged for immediate review.
-        </div>
       </div>
+
+      {/* MODAL */}
+      {openModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white w-[90%] max-w-5xl rounded shadow-lg">
+
+            <div className="flex justify-between px-4 py-2 bg-[#4a74b3] text-white">
+              <h3 className="font-semibold">
+                Contractor Review – {selectedContractor?.name}
+              </h3>
+              <button
+                onClick={() => setOpenModal(false)}
+                className="text-xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+              <video
+                src="/videos/parking-demo.mp4"
+                controls
+                autoPlay
+                muted
+                className="w-full rounded"
+              />
+
+              <div className="text-sm text-slate-600">
+                <p className="mb-3">
+                  AI-powered CCTV footage captured during capacity violations.
+                  This evidence is stored securely and linked with contractor
+                  performance records.
+                </p>
+                <p>
+                  Repeated violations automatically trigger penalties and
+                  contractor status escalation ensuring transparency and
+                  enforcement.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
